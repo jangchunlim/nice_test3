@@ -4,14 +4,12 @@
 <%@ page import="java.security.MessageDigest" %>
 <%@ page import="org.apache.commons.codec.binary.Hex" %>
 <%
-    /*
-     *******************************************************
+    /* *******************************************************
      * <결제요청 파라미터>
      * 결제시 Form 에 보내는 결제요청 파라미터입니다.
      * 샘플페이지에서는 기본(필수) 파라미터만 예시되어 있으며,
      * 추가 가능한 옵션 파라미터는 연동메뉴얼을 참고하세요.
-     *******************************************************
-     */
+     ******************************************************* */
     String merchantKey 		= "EYzu8jGGMfqaDEp76gSckuvnaHHu+bC4opsSN6lHv3b2lurNYkVXrZ7Z1AoqQnXI3eLuaUFyoRNC6FkrzVjceg=="; // 상점키
     String merchantID 		= "nicepay00m"; 				// 상점아이디
     String goodsName 		= "나이스페이"; 					// 결제상품명
@@ -22,6 +20,18 @@
     String moid 			= "mnoid1234567890"; 			// 상품주문번호
     String returnURL 		= "http://localhost:8090/payResult_utf.jsp"; // 결과페이지(절대경로) - 모바일 결제창 전용
 //    String returnURL 		= "http://localhost:8090/inedx.jsp"; // 결과페이지(절대경로) - 모바일 결제창 전용
+
+    /*
+     *******************************************************
+     * <결제요청 파라미터><신용카드 추가 요청 파라미터>
+     *******************************************************
+     */
+    String selectQuota      = "00"; 			            //
+    String selectCardCode      = "02,04,07"; 			    //
+    String shopInterest      = "0"; 			            // 상정 무이자 사용여부
+    String quotaInterest      = "02:0"; 			        // 상점 무이자 카드 정보
+
+
 
     /*
      *******************************************************
@@ -148,6 +158,22 @@
         <tr>
             <th>가상계좌입금만료일(YYYYMMDD)</th>
             <td><input type="text" name="VbankExpDate" value=""></td>
+        </tr>
+        <tr>
+            <th>selectQuota</th>
+            <td><input type="text" name="selectQuota" value="<%=selectQuota%>"></td>
+        </tr>
+        <tr>
+            <th>selectCardCode</th>
+            <td><input type="text" name="selectCardCode" value="<%=selectCardCode%>"></td>
+        </tr>
+        <tr>
+            <th>shopInterest</th>
+            <td><input type="text" name="shopInterest" value="<%=shopInterest%>"></td>
+        </tr>
+        <tr>
+            <th>quotaInterest</th>
+            <td><input type="text" name="quotaInterest" value="<%=quotaInterest%>"></td>
         </tr>
 
         <!-- 옵션 -->

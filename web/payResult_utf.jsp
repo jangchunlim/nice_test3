@@ -14,11 +14,9 @@
 <%@ page import="org.apache.commons.codec.binary.Hex" %>
 <%
 request.setCharacterEncoding("utf-8"); 
-/*
-****************************************************************************************
+/*****************************************************************************************
 * <인증 결과 파라미터>
-****************************************************************************************
-*/
+*****************************************************************************************/
 String authResultCode 	= (String)request.getParameter("AuthResultCode"); 	// 인증결과 : 0000(성공)
 String authResultMsg 	= (String)request.getParameter("AuthResultMsg"); 	// 인증결과 메시지
 String nextAppURL 		= (String)request.getParameter("NextAppURL"); 		// 승인 요청 URL
@@ -99,6 +97,8 @@ String netCancelURL 	= (String)request.getParameter("NetCancelURL"); 	// 망취�
 			<td><%=netCancelURL%></td>
 		</tr>
 
+
+
 	</table>
 	<form id="payForm" name="payForm" action="">
 		<input type="hidden" name="authResultCode" value="<%=authResultCode%>">
@@ -112,6 +112,7 @@ String netCancelURL 	= (String)request.getParameter("NetCancelURL"); 	// 망취�
 		<input type="hidden" name="amt" value="<%=amt%>">
 		<input type="hidden" name="reqReserved" value="<%=reqReserved%>">
 		<input type="hidden" name="netCancelURL" value="<%=netCancelURL%>">
+
 	</form>
 	<input type="button" value="승인 요청" onclick="javascript:call_pay_process();">
 

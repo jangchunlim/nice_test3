@@ -30,25 +30,28 @@ String partialCancelCode 	= (String)request.getParameter("PartialCancelCode"); 	
 String mid 					= "nicepay00m";	// 상점 ID
 String moid					= "nicepay_api_3.0_test";	// 주문번호
 String cancelMsg 			= "고객요청";	// 취소사유
+String charSet				= "utf-8";
+String cartType				= "0"; // 1:장바구니 결제, 0:그외
+String ediType				= "JSON";
+String refundAcctNo			= ""; //환불계좌번호
+String refundBankCd			= ""; //환불계좌 은행코드
+String refundAcctNm			= ""; //환불계좌주명
 
-/*
-****************************************************************************************
+
+/*****************************************************************************************
 * <해쉬암호화> (수정하지 마세요)
 * SHA-256 해쉬암호화는 거래 위변조를 막기위한 방법입니다. 
-****************************************************************************************
-*/
+*****************************************************************************************/
 DataEncrypt sha256Enc 	= new DataEncrypt();
 String merchantKey 		= "EYzu8jGGMfqaDEp76gSckuvnaHHu+bC4opsSN6lHv3b2lurNYkVXrZ7Z1AoqQnXI3eLuaUFyoRNC6FkrzVjceg=="; // 상점키
 String ediDate			= getyyyyMMddHHmmss();
 String signData 		= sha256Enc.encrypt(mid + cancelAmt + ediDate + merchantKey);
 
-/*
-****************************************************************************************
+/*****************************************************************************************
 * <취소 요청>
 * 취소에 필요한 데이터 생성 후 server to server 통신을 통해 취소 처리 합니다.
 * 취소 사유(CancelMsg) 와 같이 한글 텍스트가 필요한 파라미터는 euc-kr encoding 처리가 필요합니다.
-****************************************************************************************
-*/
+*****************************************************************************************/
 StringBuffer requestData = new StringBuffer();
 requestData.append("TID=").append(tid).append("&");
 requestData.append("MID=").append(mid).append("&");
@@ -61,16 +64,16 @@ requestData.append("CharSet=").append("utf-8").append("&");
 requestData.append("SignData=").append(signData);
 String resultJsonStr = connectToServer(requestData.toString(), "https://webapi.nicepay.co.kr/webapi/cancel_process.jsp");
 
-/*
-****************************************************************************************
+/*****************************************************************************************
 * <취소 결과 파라미터 정의>
 * 샘플페이지에서는 취소 결과 파라미터 중 일부만 예시되어 있으며, 
 * 추가적으로 사용하실 파라미터는 연동메뉴얼을 참고하세요.
-****************************************************************************************
-*/
+*****************************************************************************************/
 String ResultCode 	= ""; String ResultMsg 	= ""; String CancelAmt 	= "";
-String CancelDate 	= ""; String CancelTime = ""; String REFUNDTID 		= "";
+String CancelDate 	= ""; String CancelTime = ""; String REFUNDTID 	= "";
 String PayMethod    = ""; String MID        = ""; String RemainAmt  = "";
+String ErrorCD 		= ""; String ErrorMsg 	= ""; String Moid		= "";
+String CancelNum	= "";
 
 if("9999".equals(resultJsonStr)){
 	ResultCode 	= "9999";
@@ -86,6 +89,11 @@ if("9999".equals(resultJsonStr)){
 	PayMethod	= (String)resultData.get("PayMethod");	// 결제수단
 	MID			= (String)resultData.get("MID");		// MID
 	RemainAmt	= (String)resultData.get("RemainAmt");	// 잔액
+
+	ErrorCD 	= (String)resultData.get("ErrorCD");	// 결과메시지
+	ErrorMsg 	= (String)resultData.get("ErrorMsg");	// 결과메시지
+	Moid 	= (String)resultData.get("Moid");	// 결과메시지
+	CancelNum 	= (String)resultData.get("CancelNum");	// 결과메시지
 }
 %>
 <!DOCTYPE html>
@@ -127,6 +135,23 @@ if("9999".equals(resultJsonStr)){
 		<tr>
 			<th>RemainAmt</th>
 			<td><%=RemainAmt%></td>
+		</tr>
+
+		<tr>
+			<th>ErrorCD</th>
+			<td><%=ErrorCD%></td>
+		</tr>
+		<tr>
+			<th>ErrorMsg</th>
+			<td><%=ErrorMsg%></td>
+		</tr>
+		<tr>
+			<th>Moid</th>
+			<td><%=Moid%></td>
+		</tr>
+		<tr>
+			<th>CancelNum</th>
+			<td><%=CancelNum%></td>
 		</tr>
 
 	</table>

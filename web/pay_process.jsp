@@ -77,19 +77,19 @@
     /*****************************************************************************************
      * <승인 결과 신용카드 추가 파라미터 정의>
      *****************************************************************************************/
-    String cardCode     = "";
-    String cardName     = "";
-    String cardNo       = "";
-    String cardQuota    = "";
-    String cardInterest = "";
-    String acquCardCode = "";
-    String acquCardName = "";
-    String cardCI       = "";
-    String ccPartCI     = "";
-    String clickpayCI   = "";
-    String couponAmt    = "";
-    String couponMinAmt = "";
-    String pointAppAmt  = "";
+    String CardCode     = "";
+    String CardName     = "";
+    String CardNo       = "";
+    String CardQuota    = "";
+    String CardInterest = "";
+    String AcquCardCode = "";
+    String AcquCardName = "";
+    String CardCI       = "";
+    String CcPartCI     = "";
+    String ClickpayCI   = "";
+    String CouponAmt    = "";
+    String CouponMinAmt = "";
+    String PointAppAmt  = "";
 
 
     String resultJsonStr = "";
@@ -119,27 +119,30 @@
             GoodsName   = (String)resultData.get("GoodsName");	 // 상품명
             Amt       	= (String)resultData.get("Amt");		 // 결제 금액
             TID       	= (String)resultData.get("TID");		 // 거래번호
-            cardCode    = (String)resultData.get("cardCode");    // 결제 카드사 코드
-            cardName    = (String)resultData.get("cardName");    // 결제 카드사명
-            cardNo      = (String)resultData.get("cardNo");      // 카드번호
-            cardQuota   = (String)resultData.get("cardQuota");   // 할부개월
-            cardInterest= (String)resultData.get("cardInterest");// 상정분담 무이자 적용 여부(0:일반, 1:무이자)
-            acquCardCode= (String)resultData.get("acquCardCode");// 매입카드사코드
-            acquCardName= (String)resultData.get("acquCardName");// 매입카드사명
-            cardCI      = (String)resultData.get("cardCI");      // 카드 구분(0:신용,1:체크)
-            ccPartCI    = (String)resultData.get("ccPartCI");    // 부분취소 가능 여부(0:불가능,1:가능)
-            clickpayCI  = (String)resultData.get("clickpayCI");  // 간편결제 종류(6:SKPAY/8:SAMSUNGPAY /15:PAYCO/16:KAKAOPAY)
-            couponAmt   = (String)resultData.get("couponAmt");   // 매입카드사명
-            couponMinAmt= (String)resultData.get("couponMinAmt");// 매입카드사명
-            pointAppAmt = (String)resultData.get("pointAppAmt"); // 매입카드사명
-            AuthCode    = (String)resultData.get("AuthCode");
-            AuthDate    = (String)resultData.get("AuthDate");
-            MID         = (String)resultData.get("MID");
-            Moid        = (String)resultData.get("Moid");
-            BuyerEmail  = (String)resultData.get("BuyerEmail");
-            BuyerTel    = (String)resultData.get("BuyerTel");
-            BuyerName   = (String)resultData.get("BuyerName");
-            CartData    = (String)resultData.get("CartData");
+
+            AuthCode    = (String)resultData.get("AuthCode");   //승인번호
+            AuthDate    = (String)resultData.get("AuthDate");   //승인날짜
+            MID         = (String)resultData.get("MID");        //상점 아이디
+            Moid        = (String)resultData.get("Moid");       //상점 주문번호
+            BuyerEmail  = (String)resultData.get("BuyerEmail"); //구매자 이메일
+            BuyerTel    = (String)resultData.get("BuyerTel");   //구매자전화번호
+            BuyerName   = (String)resultData.get("BuyerName");  //구매자명
+            CartData    = (String)resultData.get("CartData");   //장바구니 데이터
+
+            CardCode    = (String)resultData.get("CardCode");    // 결제 카드사 코드
+            CardName    = (String)resultData.get("CardName");    // 결제 카드사명
+            CardNo      = (String)resultData.get("CardNo");      // 카드번호
+            CardQuota   = (String)resultData.get("CardQuota");   // 할부개월
+            CardInterest= (String)resultData.get("CardInterest");// 상정분담 무이자 적용 여부(0:일반, 1:무이자)
+            AcquCardCode= (String)resultData.get("AcquCardCode");// 매입카드사코드
+            AcquCardName= (String)resultData.get("AcquCardName");// 매입카드사명
+            CardCI      = (String)resultData.get("CardCI");      // 카드 구분(0:신용,1:체크)
+            CcPartCI    = (String)resultData.get("CcPartCI");    // 부분취소 가능 여부(0:불가능,1:가능)
+            ClickpayCI  = (String)resultData.get("ClickpayCI");  // 간편결제 종류(6:SKPAY/8:SAMSUNGPAY /15:PAYCO/16:KAKAOPAY)
+            CouponAmt   = (String)resultData.get("CouponAmt");   // 매입카드사명
+            CouponMinAmt= (String)resultData.get("CouponMinAmt");// 매입카드사명
+            PointAppAmt = (String)resultData.get("PointAppAmt"); // 매입카드사명
+
 
 
 
@@ -204,58 +207,6 @@
     </tr>
 
     <tr>
-        <th>cardCode</th>
-        <td><%=cardCode%></td>
-    </tr>
-    <tr>
-        <th>cardName</th>
-        <td><%=cardName%></td>
-    </tr>
-    <tr>
-        <th>cardNo</th>
-        <td><%=cardNo%></td>
-    </tr>
-    <tr>
-        <th>cardQuota</th>
-        <td><%=cardQuota%></td>
-    </tr>
-    <tr>
-        <th>cardInterest</th>
-        <td><%=cardInterest%></td>
-    </tr>
-    <tr>
-        <th>acquCardCode</th>
-        <td><%=acquCardCode%></td>
-    </tr>
-    <tr>
-        <th>acquCardName</th>
-        <td><%=acquCardName%></td>
-    </tr>
-    <tr>
-        <th>cardCI</th>
-        <td><%=cardCI%></td>
-    </tr>
-    <tr>
-        <th>ccPartCI</th>
-        <td><%=ccPartCI%></td>
-    </tr>
-    <tr>
-        <th>clickpayCI</th>
-        <td><%=clickpayCI%></td>
-    </tr>
-    <tr>
-        <th>couponAmt</th>
-        <td><%=couponAmt%></td>
-    </tr>
-    <tr>
-        <th>couponMinAmt</th>
-        <td><%=couponMinAmt%></td>
-    </tr>
-    <tr>
-        <th>pointAppAmt</th>
-        <td><%=pointAppAmt%></td>
-    </tr>
-    <tr>
         <th>AuthCode</th>
         <td><%=AuthCode%></td>
     </tr>
@@ -287,6 +238,60 @@
         <th>CartData</th>
         <td><%=CartData%></td>
     </tr>
+
+    <tr>
+        <th>CardCode</th>
+        <td><%=CardCode%></td>
+    </tr>
+    <tr>
+        <th>CardName</th>
+        <td><%=CardName%></td>
+    </tr>
+    <tr>
+        <th>CardNo</th>
+        <td><%=CardNo%></td>
+    </tr>
+    <tr>
+        <th>CardQuota</th>
+        <td><%=CardQuota%></td>
+    </tr>
+    <tr>
+        <th>CardInterest</th>
+        <td><%=CardInterest%></td>
+    </tr>
+    <tr>
+        <th>AcquCardCode</th>
+        <td><%=AcquCardCode%></td>
+    </tr>
+    <tr>
+        <th>AcquCardName</th>
+        <td><%=AcquCardName%></td>
+    </tr>
+    <tr>
+        <th>CardCI</th>
+        <td><%=CardCI%></td>
+    </tr>
+    <tr>
+        <th>CcPartCI</th>
+        <td><%=CcPartCI%></td>
+    </tr>
+    <tr>
+        <th>ClickpayCI</th>
+        <td><%=ClickpayCI%></td>
+    </tr>
+    <tr>
+        <th>CouponAmt</th>
+        <td><%=CouponAmt%></td>
+    </tr>
+    <tr>
+        <th>CouponMinAmt</th>
+        <td><%=CouponMinAmt%></td>
+    </tr>
+    <tr>
+        <th>PointAppAmt</th>
+        <td><%=PointAppAmt%></td>
+    </tr>
+
 
 
 </table>
